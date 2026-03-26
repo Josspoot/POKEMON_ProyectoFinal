@@ -4,10 +4,6 @@ import java.util.Scanner;
 
 public class Consola {
 
-    public Consola(){
-        //No debe llevar atributos esta cosa
-    }
-
     public static int leerEntero(Scanner sc, String mensaje, int min, int max) {
         while (true) {
             System.out.print(mensaje);
