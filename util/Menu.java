@@ -1,5 +1,7 @@
 package util;
 
+import excepcions.ItemNuloException;
+import excepcions.PokemonDebilitadoException;
 import java.util.Scanner;
 import pokemones.*;
 
@@ -106,7 +108,7 @@ public class Menu {
         }
     }
 
-    public void iniciar() {
+    public void iniciar() throws ItemNuloException, PokemonDebilitadoException {
         mostrarTitulo();
         boolean salir = false;
         while (!salir) {

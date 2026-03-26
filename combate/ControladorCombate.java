@@ -43,7 +43,7 @@ public class ControladorCombate {
 
             if (r.getNombreSiguiente() != null) {
                 Consola.pausa(600);
-                if (esIA) {
+                if (esIA == false) {
                     System.out.println("> Tu siguiente Pokémon: " + r.getNombreSiguiente() + "\n");
                 } else {
                     System.out

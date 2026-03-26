@@ -16,6 +16,6 @@ public class PokemonDebilitadoException extends Exception {
 
     public int getHpActual() {
         return this.hpActual;
+    }
 
-    
 }

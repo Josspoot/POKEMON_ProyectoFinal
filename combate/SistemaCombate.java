@@ -47,11 +47,14 @@ public class SistemaCombate {
         }
 
         ReporteAtaque reporte = aplicarAtaque(getPokemonIA(), getPokemonJugador(), movIdx);
+
         if (reporte.isDefensorDebilitado()) {
-            Pokemon debilitado = getPokemonJugador();
-            ia.getPokemones().remove(debilitado);
-            throw new PokemonDebilitadoException(reporte.getNombreDefensor() + " se ha debilitado",
-                    debilitado.getHpMax(), debilitado.getHp());
+            Pokemon debilitado = getPokemonJugador(); // ✅ guarda antes
+            jugador.getPokemones().remove(0); // ✅ remueve por índice
+            throw new PokemonDebilitadoException(
+                    reporte.getNombreDefensor() + " se ha debilitado",
+                    debilitado.getHpMax(),
+                    debilitado.getHp());
         }
         return reporte;
     }

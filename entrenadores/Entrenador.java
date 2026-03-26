@@ -1,9 +1,11 @@
 package entrenadores;
 
 import combate.Item;
-import pokemones.Pokemon;
+import excepcions.EquipoLlenoException;
+import excepcions.ItemNuloException;
 import java.util.ArrayList;
 import java.util.List;
+import pokemones.Pokemon;
 
 public class Entrenador {
     private String nombre;
@@ -28,15 +30,15 @@ public class Entrenador {
         return items;
     }
 
-    public void agregarPokemon(Pokemon p) {
+    public void agregarPokemon(Pokemon p) throws EquipoLlenoException {
         if (pokemones.size() >= 6)
-            throw new IllegalArgumentException("Equipo lleno, máximo 6 Pokémon");
+            throw new EquipoLlenoException("Equipo lleno, máximo 6 Pokémon", 6);
         pokemones.add(p);
     }
 
-    public void agregarItem(Item i) {
+    public void agregarItem(Item i) throws ItemNuloException {
         if (i == null)
-            throw new IllegalArgumentException("El item no puede ser nulo");
+            throw new ItemNuloException("El item no puede ser nulo", 2);
         items.add(i);
     }
 
@@ -50,7 +52,8 @@ public class Entrenador {
 
     public boolean tieneVivos() {
         for (Pokemon p : pokemones) {
-            if (p.estaVivo()) return true;
+            if (p.estaVivo())
+                return true;
         }
         return false;
     }

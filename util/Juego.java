@@ -5,6 +5,9 @@ import combate.Item;
 import combate.SistemaCombate;
 import entrenadores.Entrenador;
 import entrenadores.IAEntrenador;
+import excepcions.EquipoLlenoException;
+import excepcions.ItemNuloException;
+import excepcions.PokemonDebilitadoException;
 import java.util.List;
 import java.util.Scanner;
 import pokemones.*;
@@ -48,15 +51,19 @@ public class Juego {
                 slot--;
                 continue;
             }
+            try {
+                jugador.agregarPokemon(elegido);
+            } catch (EquipoLlenoException e) {
+                System.out.println("¡" + e.getMessage() + "!");
+            }
 
-            jugador.agregarPokemon(elegido);
             Consola.pausa(300);
             System.out.println("  > ¡" + elegido.getNombre() + " se unió al equipo!\n");
         }
         return jugador;
     }
 
-    private IAEntrenador crearIA(Entrenador jugador) {
+    private IAEntrenador crearIA(Entrenador jugador) throws ItemNuloException {
         IAEntrenador ia = new IAEntrenador("ENTRENADOR RIVAL");
         List<Pokemon> lista = pokedex.getTodos();
         List<Pokemon> equipoJugador = jugador.getPokemones();
@@ -64,7 +71,12 @@ public class Juego {
         int agregados = 0;
         for (Pokemon p : lista) {
             if (!equipoJugador.contains(p) && agregados < 2) {
-                ia.agregarPokemon(p);
+                try {
+                    ia.agregarPokemon(p);
+                } catch (EquipoLlenoException e) {
+                    System.out.println("¡" + e.getMessage() + "!");
+                }
+
                 agregados++;
             }
         }
@@ -72,7 +84,7 @@ public class Juego {
         return ia;
     }
 
-    public void iniciar() {
+    public void iniciar() throws ItemNuloException, PokemonDebilitadoException {
         Entrenador jugador = crearJugador();
         jugador.agregarItem(new Item("Poción", 20, "Cura"));
         jugador.agregarItem(new Item("Super Poción", 50, "Cura"));
