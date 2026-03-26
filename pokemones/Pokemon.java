@@ -92,4 +92,9 @@ public abstract class Pokemon implements Combatible {
     public String toString() {
         return nombre + " | Tipo: " + tipo + " | HP: " + hp + "/" + hpMax + " | Nivel: " + nivel;
     }
+
+    public String toCSV() {
+        return nombre + "," + hp + "," + nivel + "," + tipo;
+    }
+
 }

@@ -2,20 +2,33 @@ package util;
 
 import excepcions.ItemNuloException;
 import excepcions.PokemonDebilitadoException;
+
+import java.io.IOException;
 import java.util.Scanner;
 import pokemones.*;
 
 public class Menu {
     private Scanner sc;
     private Pokedex pokemones;
+    private PokemonArchivo pokeArchivo;
 
-    public Menu(Scanner sc) {
+    public Menu(Scanner sc) throws IOException {
         this.sc = sc;
+        this.pokeArchivo = new PokemonArchivo("pokemones.csv");
         this.pokemones = construirPokedex();
     }
 
-    private Pokedex construirPokedex() {
+    private Pokedex construirPokedex() throws IOException {
         Pokedex pokedex = new Pokedex();
+        try {
+            for (Pokemon p : pokeArchivo.cargar()) {
+                pokedex.agregar(p);
+            }
+
+        } catch (IOException e) {
+            System.out.println("Error al cargar archivo " + e.getMessage());
+        }
+
         pokedex.agregar(new PokemonFuego("Charmander", 100, 10));
         pokedex.agregar(new PokemonAgua("Squirtle", 100, 10));
         pokedex.agregar(new PokemonPlanta("Bulbasaur", 100, 10));
@@ -108,8 +121,17 @@ public class Menu {
         }
     }
 
+    public void guardarPokemons() {
+        try {
+            pokeArchivo.guardar(pokemones.getTodos());
+        } catch (IOException e) {
+            System.out.println("Error al guardar pokemones:" + e.getMessage());
+        }
+    }
+
     public void iniciar() throws ItemNuloException, PokemonDebilitadoException {
         mostrarTitulo();
+        guardarPokemons();
         boolean salir = false;
         while (!salir) {
             mostrarOpciones();

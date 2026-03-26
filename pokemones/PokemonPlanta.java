@@ -12,4 +12,9 @@ public class PokemonPlanta extends Pokemon {
     public int calcularDmgEspecial() {
         return bonusPlanta;
     }
+
+    @Override
+    public String toCSV() {
+        return super.toCSV();
+    }
 }
