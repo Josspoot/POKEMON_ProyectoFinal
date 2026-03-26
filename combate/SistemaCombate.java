@@ -2,9 +2,9 @@ package combate;
 
 import entrenadores.Entrenador;
 import entrenadores.IAEntrenador;
-import pokemones.Pokemon;
-
+import excepcions.PokemonDebilitadoException;
 import java.util.List;
+import pokemones.Pokemon;
 
 public class SistemaCombate {
 
@@ -17,8 +17,8 @@ public class SistemaCombate {
             throw new IllegalArgumentException("No hay entrenadores en el combate");
         }
         this.jugador = jugador;
-        this.ia      = ia;
-        this.turno   = 0;
+        this.ia = ia;
+        this.turno = 0;
     }
 
     // Avanza el turno — retorna true si le toca al jugador
@@ -27,15 +27,18 @@ public class SistemaCombate {
         return turno % 2 != 0;
     }
 
-    public ReporteAtaque ejecutarAtaqueJugador(int movimientoIdx) {
+    public ReporteAtaque ejecutarAtaqueJugador(int movimientoIdx) throws PokemonDebilitadoException {
         ReporteAtaque reporte = aplicarAtaque(getPokemonJugador(), getPokemonIA(), movimientoIdx);
         if (reporte.isDefensorDebilitado()) {
-            ia.getPokemones().remove(getPokemonIA());
+            Pokemon debilitado = getPokemonIA();
+            ia.getPokemones().remove(debilitado);
+            throw new PokemonDebilitadoException(reporte.getNombreDefensor() + " se ha debilitado",
+                    debilitado.getHpMax(), debilitado.getHp());
         }
         return reporte;
     }
 
-    public ReporteAtaque ejecutarAtaqueIA() {
+    public ReporteAtaque ejecutarAtaqueIA() throws PokemonDebilitadoException {
         int movIdx;
         if (ia instanceof IAEntrenador) {
             movIdx = ((IAEntrenador) ia).elegirMovimiento(getPokemonIA(), getPokemonJugador());
@@ -45,7 +48,10 @@ public class SistemaCombate {
 
         ReporteAtaque reporte = aplicarAtaque(getPokemonIA(), getPokemonJugador(), movIdx);
         if (reporte.isDefensorDebilitado()) {
-            jugador.getPokemones().remove(getPokemonJugador());
+            Pokemon debilitado = getPokemonJugador();
+            ia.getPokemones().remove(debilitado);
+            throw new PokemonDebilitadoException(reporte.getNombreDefensor() + " se ha debilitado",
+                    debilitado.getHpMax(), debilitado.getHp());
         }
         return reporte;
     }
@@ -65,7 +71,7 @@ public class SistemaCombate {
         defensor.recibirDmg(dmg);
 
         boolean debilitado = !defensor.estaVivo();
-        String siguiente   = null;
+        String siguiente = null;
 
         if (debilitado) {
             List<Pokemon> equipo = (defensor == getPokemonJugador())
@@ -86,8 +92,7 @@ public class SistemaCombate {
                 defensor.getNombre(),
                 defensor.getHp(),
                 debilitado,
-                siguiente
-        );
+                siguiente);
     }
 
     public boolean hayGanador() {
@@ -98,9 +103,23 @@ public class SistemaCombate {
         return !jugador.tieneVivos() ? ia : jugador;
     }
 
-    public Pokemon getPokemonJugador() { return jugador.getPokemonActivo(); }
-    public Pokemon getPokemonIA()      { return ia.getPokemonActivo(); }
-    public Entrenador getJugador()     { return jugador; }
-    public Entrenador getIA()          { return ia; }
-    public int getTurno()              { return turno; }
+    public Pokemon getPokemonJugador() {
+        return jugador.getPokemonActivo();
+    }
+
+    public Pokemon getPokemonIA() {
+        return ia.getPokemonActivo();
+    }
+
+    public Entrenador getJugador() {
+        return jugador;
+    }
+
+    public Entrenador getIA() {
+        return ia;
+    }
+
+    public int getTurno() {
+        return turno;
+    }
 }

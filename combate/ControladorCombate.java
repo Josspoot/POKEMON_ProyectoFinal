@@ -1,7 +1,9 @@
 package combate;
-import util.Consola;
+
+import excepcions.PokemonDebilitadoException;
 import java.util.List;
 import java.util.Scanner;
+import util.Consola;
 
 public class ControladorCombate {
 
@@ -13,9 +15,11 @@ public class ControladorCombate {
         this.sc = sc;
     }
 
-    public void mostrarEncabezado() { //TODO: Nos pega si los ponemos como private? pues son métodos que solo se utilizan dentro de la misma clase.
+    public void mostrarEncabezado() { // TODO: Nos pega si los ponemos como private? pues son métodos que solo se
+                                      // utilizan dentro de la misma clase.
         System.out.println("\n========================================");
-        System.out.println("  ¡" + sistema.getJugador().getNombre().toUpperCase() + " VS " + sistema.getIA().getNombre().toUpperCase() + "!");
+        System.out.println("  ¡" + sistema.getJugador().getNombre().toUpperCase() + " VS "
+                + sistema.getIA().getNombre().toUpperCase() + "!");
         System.out.println("========================================\n");
     }
 
@@ -42,13 +46,14 @@ public class ControladorCombate {
                 if (esIA) {
                     System.out.println("> Tu siguiente Pokémon: " + r.getNombreSiguiente() + "\n");
                 } else {
-                    System.out.println("> " + sistema.getIA().getNombre() + " envió a " + r.getNombreSiguiente() + "!\n");
+                    System.out
+                            .println("> " + sistema.getIA().getNombre() + " envió a " + r.getNombreSiguiente() + "!\n");
                 }
             }
         }
     }
- 
-    //TODO: MAÑANA VEO ESTO
+
+    // TODO: MAÑANA VEO ESTO
 
     public void mostrarResultadoItem(int itemIdx) {
         Item item = sistema.getJugador().getItems().get(itemIdx);
@@ -79,7 +84,7 @@ public class ControladorCombate {
         System.out.println("1. Atacar");
 
         List<Item> items = sistema.getJugador().getItems();
-        if (!items.isEmpty()){
+        if (!items.isEmpty()) {
             System.out.println("2. Usar ítem");
         }
         System.out.println();
@@ -105,7 +110,11 @@ public class ControladorCombate {
             int movIdx = Consola.leerEntero(sc, "Elige movimiento (1-" + movs.size() + "): ", 1, movs.size()) - 1;
             System.out.println();
             Consola.pausa(700);
-            mostrarReporteAtaque(sistema.ejecutarAtaqueJugador(movIdx), false);
+            try {
+                mostrarReporteAtaque(sistema.ejecutarAtaqueJugador(movIdx), false);
+            } catch (PokemonDebilitadoException e) {
+                System.out.println("¡" + e.getMessage() + "!");
+            }
 
         } else {
             System.out.println("Ítems disponibles:");
@@ -123,10 +132,12 @@ public class ControladorCombate {
     public void turnoIA() {
         System.out.println(">> " + sistema.getIA().getNombre() + " está pensando...");
         Consola.pausa(1200);
-        mostrarReporteAtaque(sistema.ejecutarAtaqueIA(), true);
+        try {
+            mostrarReporteAtaque(sistema.ejecutarAtaqueIA(), true);
+        } catch (PokemonDebilitadoException e) {
+            System.out.println("¡" + e.getMessage() + "!");
+        }
     }
-
-    
 
     public void iniciar() {
         mostrarEncabezado();
@@ -148,6 +159,5 @@ public class ControladorCombate {
 
         mostrarResultado();
     }
-
 
 }

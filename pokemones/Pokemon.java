@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Pokemon implements Combatible {
-    protected String nombre, tipo;
-    protected int hp, hpMax, nivel;
-    protected List<Movimiento> movimientos = new ArrayList<>();
+    private String nombre, tipo;
+    private int hp, hpMax, nivel;
+    private List<Movimiento> movimientos = new ArrayList<>();
 
     public Pokemon(String nombre, int hp, int nivel, String tipo) {
         if (nombre == null || nombre.isEmpty()) {
