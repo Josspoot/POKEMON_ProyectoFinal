@@ -134,6 +134,7 @@ public class Menu {
 
     public void iniciar() throws ItemNuloException, PokemonDebilitadoException {
         mostrarTitulo();
+        guardarPokemons();
         boolean salir = false;
         while (!salir) {
             mostrarOpciones();
