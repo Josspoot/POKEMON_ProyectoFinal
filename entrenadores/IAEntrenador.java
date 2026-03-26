@@ -4,8 +4,6 @@ import combate.Movimiento;
 import pokemones.Pokemon;
 import java.util.List;
 
-
-//La poderosa "IA" desarrollada por JJ a las 2 de la mañana.
 public class IAEntrenador extends Entrenador {
 
     public IAEntrenador(String nombre) {
@@ -22,11 +20,11 @@ public class IAEntrenador extends Entrenador {
 
             if (pokemonJugador.getHp() <= poderTotal && pokemonJugador.getHp() > 0) {
                 return i;
-            } //Rematar
+            } 
 
             if (poderTotal > mayorPoder) {
                 mayorPoder = poderTotal;
-                mejorIdx = i; //Agarrar el mejor mov
+                mejorIdx = i; 
             }
         }
 

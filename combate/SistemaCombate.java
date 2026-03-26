@@ -21,7 +21,6 @@ public class SistemaCombate {
         this.turno = 0;
     }
 
-    // Avanza el turno — retorna true si le toca al jugador
     public boolean avanzarTurno() {
         turno++;
         return turno % 2 != 0;
@@ -32,8 +31,7 @@ public class SistemaCombate {
         if (reporte.isDefensorDebilitado()) {
             Pokemon debilitado = getPokemonIA();
             ia.getPokemones().remove(debilitado);
-            throw new PokemonDebilitadoException(reporte.getNombreDefensor() + " se ha debilitado",
-                    debilitado.getHpMax(), debilitado.getHp());
+            throw new PokemonDebilitadoException(reporte.getNombreDefensor() + " se ha debilitado", debilitado.getHpMax(), debilitado.getHp());
         }
         return reporte;
     }
@@ -49,12 +47,9 @@ public class SistemaCombate {
         ReporteAtaque reporte = aplicarAtaque(getPokemonIA(), getPokemonJugador(), movIdx);
 
         if (reporte.isDefensorDebilitado()) {
-            Pokemon debilitado = getPokemonJugador(); // ✅ guarda antes
-            jugador.getPokemones().remove(0); // ✅ remueve por índice
-            throw new PokemonDebilitadoException(
-                    reporte.getNombreDefensor() + " se ha debilitado",
-                    debilitado.getHpMax(),
-                    debilitado.getHp());
+            Pokemon debilitado = getPokemonJugador(); 
+            jugador.getPokemones().remove(0); 
+            throw new PokemonDebilitadoException( reporte.getNombreDefensor() + " se ha debilitado", debilitado.getHpMax(), debilitado.getHp());
         }
         return reporte;
     }
@@ -77,9 +72,12 @@ public class SistemaCombate {
         String siguiente = null;
 
         if (debilitado) {
-            List<Pokemon> equipo = (defensor == getPokemonJugador())
-                    ? jugador.getPokemones()
-                    : ia.getPokemones();
+            List<Pokemon> equipo;
+            if (defensor == getPokemonJugador()) {
+                equipo = jugador.getPokemones();
+            } else {
+                equipo = ia.getPokemones();
+            }
             for (Pokemon p : equipo) {
                 if (p != defensor && p.estaVivo()) {
                     siguiente = p.getNombre();
@@ -88,14 +86,7 @@ public class SistemaCombate {
             }
         }
 
-        return new ReporteAtaque(
-                atacante.getNombre(),
-                mov.getNombre(),
-                dmg,
-                defensor.getNombre(),
-                defensor.getHp(),
-                debilitado,
-                siguiente);
+        return new ReporteAtaque( atacante.getNombre(),mov.getNombre(), dmg, defensor.getNombre(), defensor.getHp(), debilitado, siguiente);
     }
 
     public boolean hayGanador() {
@@ -103,7 +94,11 @@ public class SistemaCombate {
     }
 
     public Entrenador getGanador() {
-        return !jugador.tieneVivos() ? ia : jugador;
+        if (!jugador.tieneVivos()) {
+            return ia;
+        } else {
+            return jugador;
+        }
     }
 
     public Pokemon getPokemonJugador() {

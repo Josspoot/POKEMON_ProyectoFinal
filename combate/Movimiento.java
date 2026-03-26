@@ -10,6 +10,7 @@ public class Movimiento {
         if (nombre == null || nombre.isEmpty()) {
             throw new IllegalArgumentException("El movimiento debe de tener un nombre inicial");
         }
+        
         this.nombre = nombre;
         this.tipo = tipo;
         this.poder = poder;

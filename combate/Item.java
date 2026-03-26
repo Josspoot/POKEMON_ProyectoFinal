@@ -14,7 +14,7 @@ public class Item {
             throw new IllegalArgumentException("El efecto debe ser mayor a 0");
         this.nombre = nombre;
         this.efecto = efecto;
-        this.tipo   = tipo;
+        this.tipo = tipo;
     }
 
     public String getNombre(){

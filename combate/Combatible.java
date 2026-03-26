@@ -1,5 +1,4 @@
 package combate;
-
 import pokemones.Pokemon;
 
 public interface Combatible {
