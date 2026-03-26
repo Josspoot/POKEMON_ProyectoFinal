@@ -50,9 +50,6 @@ public class Entrenador {
         return pokemones.getFirst();
     }
 
-    public int elegirMovimiento(Pokemon pokemonIA, Pokemon pokemonJugador) {
-        return 0; 
-    }
 
     public boolean tieneVivos() {
         for (Pokemon p : pokemones) {

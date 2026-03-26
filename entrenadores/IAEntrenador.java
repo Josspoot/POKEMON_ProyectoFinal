@@ -28,7 +28,6 @@ public class IAEntrenador extends Entrenador {
             }
         }
 
-        //TODO: Agregar logica de Items -jj
         return mejorIdx;
     }
 }
