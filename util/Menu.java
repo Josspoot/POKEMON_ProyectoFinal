@@ -29,14 +29,17 @@ public class Menu {
             System.out.println("Error al cargar archivo " + e.getMessage());
         }
 
-        pokedex.agregar(new PokemonFuego("Charmander", 100, 10));
-        pokedex.agregar(new PokemonAgua("Squirtle", 100, 10));
-        pokedex.agregar(new PokemonPlanta("Bulbasaur", 100, 10));
-        pokedex.agregar(new PokemonNormal("Eevee", 100, 10));
-        pokedex.agregar(new PokemonFuego("Arcanine", 100, 15));
-        pokedex.agregar(new PokemonAgua("Gyarados", 100, 15));
-        pokedex.agregar(new PokemonPlanta("Venusaur", 100, 15));
-        pokedex.agregar(new PokemonNormal("Snorlax", 100, 15));
+        if (pokeArchivo.cargar().isEmpty()) {
+            pokedex.agregar(new PokemonFuego("Charmander", 100, 10));
+            pokedex.agregar(new PokemonAgua("Squirtle", 100, 10));
+            pokedex.agregar(new PokemonPlanta("Bulbasaur", 100, 10));
+            pokedex.agregar(new PokemonNormal("Eevee", 100, 10));
+            pokedex.agregar(new PokemonFuego("Arcanine", 100, 15));
+            pokedex.agregar(new PokemonAgua("Gyarados", 100, 15));
+            pokedex.agregar(new PokemonPlanta("Venusaur", 100, 15));
+            pokedex.agregar(new PokemonNormal("Snorlax", 100, 15));
+
+        }
 
         java.util.List<Pokemon> todos = pokedex.getTodos();
         todos.get(0).agregarMovimiento("Ascuas", "Fuego", 15, 100);
@@ -131,7 +134,6 @@ public class Menu {
 
     public void iniciar() throws ItemNuloException, PokemonDebilitadoException {
         mostrarTitulo();
-        guardarPokemons();
         boolean salir = false;
         while (!salir) {
             mostrarOpciones();
