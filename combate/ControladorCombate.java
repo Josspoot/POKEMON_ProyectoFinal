@@ -1,8 +1,9 @@
 package combate;
-import util.Consola;
+
+import excepcions.PokemonDebilitadoException;
 import java.util.List;
 import java.util.Scanner;
-import excepcions.PokemonDebilitadoException;
+import util.Consola;
 
 public class ControladorCombate {
 
@@ -16,7 +17,8 @@ public class ControladorCombate {
 
     public void mostrarEncabezado() {
         System.out.println("\n========================================");
-        System.out.println("  ¡" + sistema.getJugador().getNombre().toUpperCase() + " VS " + sistema.getIA().getNombre().toUpperCase() + "!");
+        System.out.println("  ¡" + sistema.getJugador().getNombre().toUpperCase() + " VS "
+                + sistema.getIA().getNombre().toUpperCase() + "!");
         System.out.println("========================================\n");
     }
 
@@ -43,7 +45,8 @@ public class ControladorCombate {
                 if (esIA) {
                     System.out.println("> Tu siguiente Pokémon: " + r.getNombreSiguiente() + "\n");
                 } else {
-                    System.out.println("> " + sistema.getIA().getNombre() + " envió a " + r.getNombreSiguiente() + "!\n");
+                    System.out
+                            .println("> " + sistema.getIA().getNombre() + " envió a " + r.getNombreSiguiente() + "!\n");
                 }
             }
         }
@@ -64,7 +67,6 @@ public class ControladorCombate {
         Consola.pausa(400);
         if (sistema.getGanador() == sistema.getJugador()) {
             System.out.println("¡GANASTE! ¡Eres el mejor entrenador!\n");
-            System.out.println(sistema.getJugador().toString());
         } else {
             System.out.println("¡Perdiste! El rival fue demasiado fuerte.");
         }
@@ -78,7 +80,7 @@ public class ControladorCombate {
         System.out.println("1. Atacar");
 
         List<Item> items = sistema.getJugador().getItems();
-        if (!items.isEmpty()){
+        if (!items.isEmpty()) {
             System.out.println("2. Usar ítem");
         }
         System.out.println();
@@ -107,7 +109,7 @@ public class ControladorCombate {
             try {
                 mostrarReporteAtaque(sistema.ejecutarAtaqueJugador(movIdx), false);
             } catch (PokemonDebilitadoException e) {
-                System.out.println("ERROR: " + e.getMessage() + "\n");
+                System.out.println("> " + e.getMessage() + "\n");
             }
 
         } else {
@@ -129,7 +131,7 @@ public class ControladorCombate {
         try {
             mostrarReporteAtaque(sistema.ejecutarAtaqueIA(), true);
         } catch (PokemonDebilitadoException e) {
-            System.out.println("ERROR: " + e.getMessage() + "\n");
+            System.out.println("> " + e.getMessage() + "\n");
         }
     }
 
@@ -153,6 +155,5 @@ public class ControladorCombate {
 
         mostrarResultado();
     }
-
 
 }
