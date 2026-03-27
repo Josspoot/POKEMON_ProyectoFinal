@@ -1,5 +1,8 @@
 package pokemones;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -23,6 +26,25 @@ public class Pokedex {
             System.out.println("  " + (i + 1) + ". " + pokemones.get(i));
         }
         System.out.println();
+    }
+
+    public void listarMenu() {
+        String ruta = "pokemones.csv";
+        String linea;
+        try (BufferedReader br = new BufferedReader(new FileReader(ruta))) {
+            int i = 0;
+            while ((linea = br.readLine()) != null) {
+                i++;
+                System.out.print(i + ". ");
+                String[] campos = linea.split(",");
+                for (String campo : campos) {
+                    System.out.print(campo + " | ");
+                }
+                System.out.println();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public List<Pokemon> getTodos() {
