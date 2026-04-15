@@ -1,4 +1,4 @@
-package combate;
+package modelo;
 
 public class ReporteAtaque {
 
@@ -10,7 +10,8 @@ public class ReporteAtaque {
     private boolean defensorDebilitado;
     private String nombreSiguiente;
 
-    public ReporteAtaque(String nombreAtacante, String nombreMovimiento, int dmg, String nombreDefensor, int hpRestante, boolean defensorDebilitado, String nombreSiguiente) {
+    public ReporteAtaque(String nombreAtacante, String nombreMovimiento, int dmg, String nombreDefensor, int hpRestante,
+            boolean defensorDebilitado, String nombreSiguiente) {
         this.nombreAtacante = nombreAtacante;
         this.nombreMovimiento = nombreMovimiento;
         this.dmg = dmg;
@@ -20,25 +21,31 @@ public class ReporteAtaque {
         this.nombreSiguiente = nombreSiguiente;
     }
 
-    public String getNombreAtacante(){
+    public String getNombreAtacante() {
         return nombreAtacante;
     }
-    public String getNombreMovimiento(){ 
+
+    public String getNombreMovimiento() {
         return nombreMovimiento;
     }
-    public int getDmg(){
-        return dmg; 
+
+    public int getDmg() {
+        return dmg;
     }
-    public String getNombreDefensor(){ 
-        return nombreDefensor; 
+
+    public String getNombreDefensor() {
+        return nombreDefensor;
     }
-    public int getHpRestante(){ 
-        return hpRestante; 
+
+    public int getHpRestante() {
+        return hpRestante;
     }
-    public boolean isDefensorDebilitado(){ 
-        return defensorDebilitado; 
+
+    public boolean isDefensorDebilitado() {
+        return defensorDebilitado;
     }
-    public String getNombreSiguiente(){ 
-        return nombreSiguiente; 
+
+    public String getNombreSiguiente() {
+        return nombreSiguiente;
     }
 }

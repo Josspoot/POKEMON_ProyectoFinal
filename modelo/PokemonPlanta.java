@@ -1,4 +1,4 @@
-package pokemones;
+package modelo;
 
 public class PokemonPlanta extends Pokemon {
     private int bonusPlanta;

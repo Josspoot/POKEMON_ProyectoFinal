@@ -1,16 +1,17 @@
 package util;
 
-import combate.ControladorCombate;
-import combate.Item;
-import combate.SistemaCombate;
-import entrenadores.Entrenador;
-import entrenadores.IAEntrenador;
 import excepcions.EquipoLlenoException;
 import excepcions.ItemNuloException;
 import excepcions.PokemonDebilitadoException;
 import java.util.List;
 import java.util.Scanner;
-import pokemones.*;
+import modelo.Entrenador;
+import modelo.Item;
+import modelo.Pokemon;
+import persistencia.Pokedex;
+import servicio.ControladorCombate;
+import servicio.IAEntrenador;
+import servicio.SistemaCombate;
 
 public class Juego {
     private Scanner sc;

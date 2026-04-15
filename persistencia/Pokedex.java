@@ -1,4 +1,4 @@
-package pokemones;
+package persistencia;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+import modelo.Pokemon;
 
 public class Pokedex {
     private List<Pokemon> pokemones;

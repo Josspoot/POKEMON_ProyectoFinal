@@ -1,8 +1,11 @@
-package combate;
+package servicio;
 
 import excepcions.PokemonDebilitadoException;
 import java.util.List;
 import java.util.Scanner;
+import modelo.Item;
+import modelo.Movimiento;
+import modelo.ReporteAtaque;
 import util.Consola;
 
 public class ControladorCombate {

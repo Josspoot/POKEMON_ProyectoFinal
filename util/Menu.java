@@ -4,7 +4,13 @@ import excepcions.ItemNuloException;
 import excepcions.PokemonDebilitadoException;
 import java.io.IOException;
 import java.util.Scanner;
-import pokemones.*;
+import modelo.Pokemon;
+import modelo.PokemonAgua;
+import modelo.PokemonFuego;
+import modelo.PokemonNormal;
+import modelo.PokemonPlanta;
+import persistencia.Pokedex;
+import persistencia.PokemonArchivo;
 
 public class Menu {
     private Scanner sc;

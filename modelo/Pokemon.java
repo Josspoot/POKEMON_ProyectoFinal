@@ -1,7 +1,5 @@
-package pokemones;
+package modelo;
 
-import combate.Combatible;
-import combate.Movimiento;
 import java.util.ArrayList;
 import java.util.List;
 

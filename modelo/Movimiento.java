@@ -1,4 +1,4 @@
-package combate;
+package modelo;
 
 public class Movimiento {
     private String nombre;
@@ -10,24 +10,27 @@ public class Movimiento {
         if (nombre == null || nombre.isEmpty()) {
             throw new IllegalArgumentException("El movimiento debe de tener un nombre inicial");
         }
-        
+
         this.nombre = nombre;
         this.tipo = tipo;
         this.poder = poder;
         this.precision = precision;
     }
 
-    public String getNombre(){ 
-        return nombre; 
+    public String getNombre() {
+        return nombre;
     }
-    public String getTipo(){ 
-        return tipo; 
+
+    public String getTipo() {
+        return tipo;
     }
-    public int getPoder(){
+
+    public int getPoder() {
         return poder;
     }
-    public int getPrecision(){ 
-        return precision; 
+
+    public int getPrecision() {
+        return precision;
     }
 
     @Override

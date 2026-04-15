@@ -1,4 +1,4 @@
-package util;
+package persistencia;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,11 +9,11 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-import pokemones.Pokemon;
-import pokemones.PokemonAgua;
-import pokemones.PokemonFuego;
-import pokemones.PokemonNormal;
-import pokemones.PokemonPlanta;
+import modelo.Pokemon;
+import modelo.PokemonAgua;
+import modelo.PokemonFuego;
+import modelo.PokemonNormal;
+import modelo.PokemonPlanta;
 
 public class PokemonArchivo {
     private String rutaArchivo;

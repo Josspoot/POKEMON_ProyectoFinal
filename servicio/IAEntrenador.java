@@ -1,7 +1,9 @@
-package entrenadores;
+package servicio;
 
-import combate.Movimiento;
-import pokemones.Pokemon;
+import modelo.Entrenador;
+import modelo.Movimiento;
+import modelo.Pokemon;
+
 import java.util.List;
 
 public class IAEntrenador extends Entrenador {
@@ -20,11 +22,11 @@ public class IAEntrenador extends Entrenador {
 
             if (pokemonJugador.getHp() <= poderTotal && pokemonJugador.getHp() > 0) {
                 return i;
-            } 
+            }
 
             if (poderTotal > mayorPoder) {
                 mayorPoder = poderTotal;
-                mejorIdx = i; 
+                mejorIdx = i;
             }
         }
 

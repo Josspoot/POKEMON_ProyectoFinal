@@ -1,9 +1,14 @@
-package combate;
+package servicio;
 
 import entrenadores.*;
 import excepcions.PokemonDebilitadoException;
+import modelo.Entrenador;
+import modelo.Item;
+import modelo.Movimiento;
+import modelo.Pokemon;
+import modelo.ReporteAtaque;
+
 import java.util.List;
-import pokemones.Pokemon;
 
 public class SistemaCombate {
 
@@ -30,7 +35,8 @@ public class SistemaCombate {
         if (reporte.isDefensorDebilitado()) {
             Pokemon debilitado = getPokemonIA();
             ia.getPokemones().remove(debilitado);
-            throw new PokemonDebilitadoException(reporte.getNombreDefensor() + " se ha debilitado", debilitado.getHpMax(), debilitado.getHp());
+            throw new PokemonDebilitadoException(reporte.getNombreDefensor() + " se ha debilitado",
+                    debilitado.getHpMax(), debilitado.getHp());
         }
         return reporte;
     }
@@ -44,10 +50,9 @@ public class SistemaCombate {
             Pokemon debilitado = getPokemonJugador();
             jugador.getPokemones().remove(0);
             throw new PokemonDebilitadoException(
-                reporte.getNombreDefensor() + " se ha debilitado",
-                debilitado.getHpMax(),
-                debilitado.getHp()
-            );
+                    reporte.getNombreDefensor() + " se ha debilitado",
+                    debilitado.getHpMax(),
+                    debilitado.getHp());
         }
         return reporte;
     }
@@ -84,7 +89,8 @@ public class SistemaCombate {
             }
         }
 
-        return new ReporteAtaque( atacante.getNombre(),mov.getNombre(), dmg, defensor.getNombre(), defensor.getHp(), debilitado, siguiente);
+        return new ReporteAtaque(atacante.getNombre(), mov.getNombre(), dmg, defensor.getNombre(), defensor.getHp(),
+                debilitado, siguiente);
     }
 
     public boolean hayGanador() {

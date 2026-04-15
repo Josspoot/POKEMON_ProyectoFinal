@@ -1,11 +1,9 @@
-package entrenadores;
+package modelo;
 
-import combate.Item;
 import excepcions.EquipoLlenoException;
 import excepcions.ItemNuloException;
 import java.util.ArrayList;
 import java.util.List;
-import pokemones.Pokemon;
 
 public class Entrenador {
     private String nombre;
@@ -49,7 +47,6 @@ public class Entrenador {
     public Pokemon getPokemonActivo() {
         return pokemones.getFirst();
     }
-
 
     public boolean tieneVivos() {
         for (Pokemon p : pokemones) {

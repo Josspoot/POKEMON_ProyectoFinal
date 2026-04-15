@@ -1,6 +1,4 @@
-package combate;
-
-import pokemones.Pokemon;
+package modelo;
 
 public class Item {
     private String nombre;
@@ -17,13 +15,15 @@ public class Item {
         this.tipo = tipo;
     }
 
-    public String getNombre(){
+    public String getNombre() {
         return nombre;
     }
-    public int getEfecto(){
+
+    public int getEfecto() {
         return efecto;
     }
-    public String getTipo(){
+
+    public String getTipo() {
         return tipo;
     }
 
