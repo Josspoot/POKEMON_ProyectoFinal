@@ -24,15 +24,6 @@ public class Pokedex {
     }
 
     public void listar() {
-        if (pokemones.isEmpty())
-            throw new IllegalArgumentException("No hay pokemones en la pokedex");
-        for (int i = 0; i < pokemones.size(); i++) {
-            System.out.println("  " + (i + 1) + ". " + pokemones.get(i));
-        }
-        System.out.println();
-    }
-
-    public void listarMenu() {
         String ruta = "pokemones.csv";
         String linea;
         try (BufferedReader br = new BufferedReader(new FileReader(ruta))) {
