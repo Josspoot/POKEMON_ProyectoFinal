@@ -9,7 +9,15 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
         Menu menu = new Menu(sc);
-        menu.iniciar();
+
+        try {
+            menu.iniciar();
+
+        } catch (PokemonDebilitadoException e) {
+            System.out.println("Error " + e.getMessage());
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error " + e.getMessage());
+        }
         sc.close();
 
     }
