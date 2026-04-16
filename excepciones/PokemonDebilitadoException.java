@@ -1,4 +1,4 @@
-package excepcions;
+package excepciones;
 
 public class PokemonDebilitadoException extends Exception {
     private int hpMaximo;

@@ -16,8 +16,10 @@ public class Pokedex {
         this.pokemones = new ArrayList<>();
     }
 
-    public void agregar(Pokemon p) {
+    public void agregar(Pokemon p, PokemonArchivo a) throws IOException {
         pokemones.add(p);
+        a.guardar(pokemones);
+
     }
 
     public void listar() {

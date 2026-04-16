@@ -1,9 +1,9 @@
 package util;
 
-import excepcions.ItemNuloException;
-import excepcions.PokemonDebilitadoException;
 import java.io.IOException;
 import java.util.Scanner;
+
+import excepciones.PokemonDebilitadoException;
 import modelo.Pokemon;
 import modelo.PokemonAgua;
 import modelo.PokemonFuego;
@@ -27,7 +27,7 @@ public class Menu {
         Pokedex pokedex = new Pokedex();
         try {
             for (Pokemon p : pokeArchivo.cargar()) {
-                pokedex.agregar(p);
+                pokedex.agregar(p, pokeArchivo);
             }
 
         } catch (IOException e) {
@@ -35,14 +35,14 @@ public class Menu {
         }
 
         if (pokeArchivo.cargar().isEmpty()) {
-            pokedex.agregar(new PokemonFuego("Charmander", 100, 10));
-            pokedex.agregar(new PokemonAgua("Squirtle", 100, 10));
-            pokedex.agregar(new PokemonPlanta("Bulbasaur", 100, 10));
-            pokedex.agregar(new PokemonNormal("Eevee", 100, 10));
-            pokedex.agregar(new PokemonFuego("Arcanine", 100, 15));
-            pokedex.agregar(new PokemonAgua("Gyarados", 100, 15));
-            pokedex.agregar(new PokemonPlanta("Venusaur", 100, 15));
-            pokedex.agregar(new PokemonNormal("Snorlax", 100, 15));
+            pokedex.agregar(new PokemonFuego("Charmander", 100, 10), pokeArchivo);
+            pokedex.agregar(new PokemonAgua("Squirtle", 100, 10), pokeArchivo);
+            pokedex.agregar(new PokemonPlanta("Bulbasaur", 100, 10), pokeArchivo);
+            pokedex.agregar(new PokemonNormal("Eevee", 100, 10), pokeArchivo);
+            pokedex.agregar(new PokemonFuego("Arcanine", 100, 15), pokeArchivo);
+            pokedex.agregar(new PokemonAgua("Gyarados", 100, 15), pokeArchivo);
+            pokedex.agregar(new PokemonPlanta("Venusaur", 100, 15), pokeArchivo);
+            pokedex.agregar(new PokemonNormal("Snorlax", 100, 15), pokeArchivo);
 
         }
 
@@ -138,7 +138,7 @@ public class Menu {
         }
     }
 
-    public void iniciar() throws ItemNuloException, PokemonDebilitadoException {
+    public void iniciar() throws PokemonDebilitadoException {
         mostrarTitulo();
         guardarPokemons();
         boolean salir = false;

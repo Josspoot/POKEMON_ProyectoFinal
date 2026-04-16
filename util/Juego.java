@@ -1,10 +1,10 @@
 package util;
 
-import excepcions.EquipoLlenoException;
-import excepcions.ItemNuloException;
-import excepcions.PokemonDebilitadoException;
 import java.util.List;
 import java.util.Scanner;
+
+import excepciones.EquipoLlenoException;
+import excepciones.PokemonDebilitadoException;
 import modelo.Entrenador;
 import modelo.Item;
 import modelo.Pokemon;
@@ -64,7 +64,7 @@ public class Juego {
         return jugador;
     }
 
-    private IAEntrenador crearIA(Entrenador jugador) throws ItemNuloException {
+    private IAEntrenador crearIA(Entrenador jugador) {
         IAEntrenador ia = new IAEntrenador("ENTRENADOR RIVAL");
         List<Pokemon> lista = pokedex.getTodos();
         List<Pokemon> equipoJugador = jugador.getPokemones();
@@ -85,7 +85,7 @@ public class Juego {
         return ia;
     }
 
-    public void iniciar() throws ItemNuloException, PokemonDebilitadoException {
+    public void iniciar() throws PokemonDebilitadoException {
         Entrenador jugador = crearJugador();
         jugador.agregarItem(new Item("Poción", 20, "Cura"));
         jugador.agregarItem(new Item("Super Poción", 50, "Cura"));

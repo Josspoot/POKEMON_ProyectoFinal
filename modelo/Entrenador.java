@@ -1,7 +1,6 @@
 package modelo;
 
-import excepcions.EquipoLlenoException;
-import excepcions.ItemNuloException;
+import excepciones.EquipoLlenoException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,9 +33,9 @@ public class Entrenador {
         pokemones.add(p);
     }
 
-    public void agregarItem(Item i) throws ItemNuloException {
+    public void agregarItem(Item i) throws IllegalArgumentException {
         if (i == null)
-            throw new ItemNuloException("El item no puede ser nulo", 2);
+            throw new IllegalArgumentException("El item no puede ser nulo");
         items.add(i);
     }
 
