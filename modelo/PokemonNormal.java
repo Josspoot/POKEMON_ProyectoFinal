@@ -13,8 +13,4 @@ public class PokemonNormal extends Pokemon {
         return bonusNormal;
     }
 
-    @Override
-    public String toCSV() {
-        return super.toCSV();
-    }
 }

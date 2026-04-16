@@ -13,9 +13,4 @@ public class PokemonAgua extends Pokemon {
         return bonusAgua;
     }
 
-    @Override
-    public String toCSV() {
-        return super.toCSV();
-    }
-
 }

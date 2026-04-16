@@ -13,8 +13,4 @@ public class PokemonFuego extends Pokemon {
         return bonusFuego;
     }
 
-    @Override
-    public String toCSV() {
-        return super.toCSV();
-    }
 }
