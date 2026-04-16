@@ -6,11 +6,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Scanner;
 import modelo.Pokemon;
+import servicio.ServicioPokedex;
 
 public class Pokedex {
     private List<Pokemon> pokemones;
+    ServicioPokedex servicio = new ServicioPokedex();
 
     public Pokedex() {
         this.pokemones = new ArrayList<>();
@@ -55,11 +56,9 @@ public class Pokedex {
         return pokemones;
     }
 
-    public Pokemon buscarNombre(Scanner sc) {
+    public Pokemon buscarNombre(String nombre) {
         if (pokemones.isEmpty())
             throw new IllegalArgumentException("No hay pokemones en la pokedex");
-        System.out.print("Ingresa el nombre a buscar: ");
-        String nombre = sc.nextLine().toLowerCase();
         for (Pokemon p : pokemones) {
             if (p.getNombre().toLowerCase().equals(nombre)) {
                 System.out.println(p);
@@ -71,11 +70,10 @@ public class Pokedex {
         return null;
     }
 
-    public List<Pokemon> buscarPorElemento(Scanner sc) {
+    public List<Pokemon> buscarPorElemento(String tipo) {
         if (pokemones.isEmpty())
             throw new IllegalArgumentException("No hay pokemones en la pokedex");
-        System.out.print("Ingresa el tipo a buscar: ");
-        String tipo = sc.nextLine().toLowerCase();
+
         List<Pokemon> resultado = new ArrayList<>();
         for (Pokemon p : pokemones) {
             if (p.getTipo().toLowerCase().equals(tipo)) {

@@ -118,11 +118,17 @@ public class Menu {
                     break;
                 case 2:
                     System.out.println("POKEMONES ENCONTRADOS: ");
-                    pokemones.buscarNombre(sc);
+
+                    System.out.print("Ingresa el nombre a buscar: ");
+                    String nombre = sc.nextLine().toLowerCase();
+
+                    pokemones.buscarNombre(nombre);
                     break;
                 case 3:
                     System.out.println("POKEMONES ENCONTRADOS: ");
-                    pokemones.buscarPorElemento(sc);
+                    System.out.print("Ingresa el tipo a buscar: ");
+                    String tipo = sc.nextLine().toLowerCase();
+                    pokemones.buscarPorElemento(tipo);
                     break;
                 case 4:
                     salir = true;
