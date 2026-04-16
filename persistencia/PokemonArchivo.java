@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-
 import modelo.Pokemon;
 import modelo.PokemonAgua;
 import modelo.PokemonFuego;
@@ -95,4 +94,5 @@ public class PokemonArchivo {
         }
 
     }
+
 }

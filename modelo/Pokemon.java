@@ -95,4 +95,37 @@ public abstract class Pokemon implements Combatible {
         return nombre + "," + hp + "," + nivel + "," + tipo;
     }
 
+    public static Pokemon fromCSV(String linea) {
+        String[] datos = linea.split(",");
+
+        if (datos.length != 4) {
+            throw new IllegalArgumentException("Formato invalido " + linea);
+        }
+        String nombre = datos[0].trim();
+        int hp;
+        int nivel;
+        String tipo = datos[3].trim();
+
+        try {
+            hp = Integer.parseInt(datos[1].trim());
+            nivel = Integer.parseInt(datos[2].trim());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Numeros invalidos: " + linea);
+        }
+
+        switch (tipo.toLowerCase()) {
+            case "fuego":
+                return new PokemonFuego(nombre, hp, nivel);
+            case "agua":
+                return new PokemonAgua(nombre, hp, nivel);
+            case "planta":
+                return new PokemonPlanta(nombre, hp, nivel);
+            case "normal":
+                return new PokemonNormal(nombre, hp, nivel);
+            default:
+                throw new IllegalArgumentException("Tipo de pokemon erroneo: " + tipo);
+        }
+
+    }
+
 }

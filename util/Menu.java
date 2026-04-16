@@ -1,9 +1,8 @@
 package util;
 
+import excepciones.PokemonDebilitadoException;
 import java.io.IOException;
 import java.util.Scanner;
-
-import excepciones.PokemonDebilitadoException;
 import modelo.Pokemon;
 import modelo.PokemonAgua;
 import modelo.PokemonFuego;
@@ -114,7 +113,7 @@ public class Menu {
                     System.out.println("#  POKEMONES #");
                     System.out.println("##############");
                     System.out.println();
-                    pokemones.listarMenu();
+                    pokemones.listar();
                     break;
                 case 2:
                     System.out.println("POKEMONES ENCONTRADOS: ");
