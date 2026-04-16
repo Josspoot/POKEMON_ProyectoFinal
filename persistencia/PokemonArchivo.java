@@ -28,6 +28,8 @@ public class PokemonArchivo {
             for (Pokemon est : estudiantes) {
                 pw.println(est.toCSV());
             }
+        } catch (IOException e) {
+            System.out.println("Error al guardar pokemones:" + e.getMessage());
         }
     }
 

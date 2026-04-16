@@ -1,8 +1,9 @@
 package util;
 
-import excepciones.PokemonDebilitadoException;
 import java.io.IOException;
 import java.util.Scanner;
+
+import excepciones.PokemonDebilitadoException;
 import modelo.Pokemon;
 import modelo.PokemonAgua;
 import modelo.PokemonFuego;
@@ -113,7 +114,7 @@ public class Menu {
                     System.out.println("#  POKEMONES #");
                     System.out.println("##############");
                     System.out.println();
-                    pokemones.listar();
+                    pokemones.listarMenu();
                     break;
                 case 2:
                     System.out.println("POKEMONES ENCONTRADOS: ");
@@ -129,17 +130,9 @@ public class Menu {
         }
     }
 
-    public void guardarPokemons() {
-        try {
-            pokeArchivo.guardar(pokemones.getTodos());
-        } catch (IOException e) {
-            System.out.println("Error al guardar pokemones:" + e.getMessage());
-        }
-    }
-
-    public void iniciar() throws PokemonDebilitadoException {
+    public void iniciar() throws PokemonDebilitadoException, IOException {
         mostrarTitulo();
-        guardarPokemons();
+        pokeArchivo.guardar(pokemones.getTodos());
         boolean salir = false;
         while (!salir) {
             mostrarOpciones();
