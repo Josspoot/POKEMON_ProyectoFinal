@@ -2,6 +2,7 @@ package util;
 
 import excepciones.PokemonDebilitadoException;
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 import modelo.Pokemon;
 import modelo.PokemonAgua;
@@ -10,16 +11,20 @@ import modelo.PokemonNormal;
 import modelo.PokemonPlanta;
 import persistencia.Pokedex;
 import persistencia.PokemonArchivo;
+import servicio.ServicioPokedex;
 
 public class Menu {
-    private Scanner sc;
-    private Pokedex pokemones;
-    private PokemonArchivo pokeArchivo;
+
+    private final Scanner sc;
+    private final ServicioPokedex servicio;
+    private final Pokedex pokemones;
+    private final PokemonArchivo pokeArchivo;
 
     public Menu(Scanner sc) throws IOException {
         this.sc = sc;
         this.pokeArchivo = new PokemonArchivo("pokemones.csv");
         this.pokemones = construirPokedex();
+        this.servicio = new ServicioPokedex(pokemones, pokeArchivo);
     }
 
     private Pokedex construirPokedex() throws IOException {
@@ -28,7 +33,6 @@ public class Menu {
             for (Pokemon p : pokeArchivo.cargar()) {
                 pokedex.agregar(p, pokeArchivo);
             }
-
         } catch (IOException e) {
             System.out.println("Error al cargar archivo " + e.getMessage());
         }
@@ -42,10 +46,9 @@ public class Menu {
             pokedex.agregar(new PokemonAgua("Gyarados", 100, 15), pokeArchivo);
             pokedex.agregar(new PokemonPlanta("Venusaur", 100, 15), pokeArchivo);
             pokedex.agregar(new PokemonNormal("Snorlax", 100, 15), pokeArchivo);
-
         }
 
-        java.util.List<Pokemon> todos = pokedex.getTodos();
+        List<Pokemon> todos = pokedex.getTodos();
         todos.get(0).agregarMovimiento("Ascuas", "Fuego", 15, 100);
         todos.get(0).agregarMovimiento("Arañazo", "Normal", 10, 100);
         todos.get(1).agregarMovimiento("Pistola Agua", "Agua", 15, 100);
@@ -107,6 +110,7 @@ public class Menu {
             System.out.println("4. Salir.");
             int caso = Consola.leerEntero(sc, "Elige (1-4): ", 1, 4);
             System.out.println();
+
             switch (caso) {
                 case 1:
                     System.out.println("##############");
@@ -114,21 +118,37 @@ public class Menu {
                     System.out.println("##############");
                     System.out.println();
                     pokemones.listar();
+                    System.out.println();
                     break;
+
                 case 2:
-                    System.out.println("POKEMONES ENCONTRADOS: ");
-
                     System.out.print("Ingresa el nombre a buscar: ");
-                    String nombre = sc.nextLine().toLowerCase();
+                    String nombre = sc.nextLine();
+                    Pokemon encontrado = servicio.buscarNombre(nombre);
+                    System.out.println("POKEMONES ENCONTRADOS:");
+                    if (encontrado == null) {
+                        System.out.println("No se encontro ningun pokemon con ese nombre.");
+                    } else {
+                        System.out.println(encontrado);
+                    }
+                    System.out.println();
+                    break;
 
-                    pokemones.buscarNombre(nombre);
-                    break;
                 case 3:
-                    System.out.println("POKEMONES ENCONTRADOS: ");
                     System.out.print("Ingresa el tipo a buscar: ");
-                    String tipo = sc.nextLine().toLowerCase();
-                    pokemones.buscarPorElemento(tipo);
+                    String tipo = sc.nextLine();
+                    List<Pokemon> resultado = servicio.buscarPorElemento(tipo);
+                    System.out.println("POKEMONES ENCONTRADOS:");
+                    if (resultado.isEmpty()) {
+                        System.out.println("No se encontraron pokemones de ese tipo.");
+                    } else {
+                        for (int i = 0; i < resultado.size(); i++) {
+                            System.out.println((i + 1) + ". " + resultado.get(i));
+                        }
+                    }
+                    System.out.println();
                     break;
+
                 case 4:
                     salir = true;
             }

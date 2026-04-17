@@ -1,10 +1,9 @@
 package util;
 
-import java.util.List;
-import java.util.Scanner;
-
 import excepciones.EquipoLlenoException;
 import excepciones.PokemonDebilitadoException;
+import java.util.List;
+import java.util.Scanner;
 import modelo.Entrenador;
 import modelo.Item;
 import modelo.Pokemon;
